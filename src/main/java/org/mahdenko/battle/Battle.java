@@ -3,6 +3,8 @@ package org.mahdenko.battle;
 import org.mahdenko.battle.characters.Army;
 import org.mahdenko.battle.characters.Warrior;
 
+import java.util.Iterator;
+
 public class Battle {
     public static boolean fight(Warrior attacker, Warrior defender){
         while (true){
@@ -14,11 +16,11 @@ public class Battle {
     }
 
     public static boolean fight(Army attackers, Army defenders){
-        while (true){
-            if (!attackers.hasWarriors()) return false;
-            if (!defenders.hasWarriors()) return true;
-            if (fight(attackers.peekFirst(), defenders.peekFirst())) defenders.removeFirst();
-            else attackers.removeFirst();
+        Iterator<Warrior> itAttackers = attackers.firstAlive();
+        Iterator<Warrior> itDefenders = defenders.firstAlive();
+        while (itAttackers.hasNext() && itDefenders.hasNext()){
+            fight(itAttackers.next(), itDefenders.next());
         }
+        return itAttackers.hasNext();
     }
 }
