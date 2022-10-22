@@ -2,9 +2,14 @@ package org.mahdenko.battle.characters;
 
 public class Warrior {
     private static final int ATTACK = 5;
-    private int health = 50;
+    private int health;
 
     public Warrior() {
+        this(50);
+    }
+
+    protected Warrior(int health){
+        this.health = health;
     }
 
     public boolean isAlive(){

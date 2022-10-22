@@ -5,10 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.mahdenko.battle.characters.Army;
-import org.mahdenko.battle.characters.Defender;
-import org.mahdenko.battle.characters.Knight;
-import org.mahdenko.battle.characters.Warrior;
+import org.mahdenko.battle.characters.*;
 
 import java.util.stream.Stream;
 
@@ -38,8 +35,12 @@ public class ArmyFightTest {
                         new Army().addUnits(Defender::new, 2),
                         new Army().addUnits(Knight::new),
                         true
+                ),
+                Arguments.of(
+                        new Army().addUnits(Defender::new),
+                        new Army().addUnits(Vampire::new, 3),
+                        false
                 )
-
         );
     }
 }
