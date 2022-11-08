@@ -1,13 +1,10 @@
 package org.mahdenko.battle.characters;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.NoSuchElementException;
-import java.util.Queue;
+import java.util.*;
 import java.util.function.Supplier;
 
 public class Army {
-    private Queue<Warrior> warriors;
+    private ArrayList<Warrior> warriors;
 
     public Iterator<Warrior> firstAlive(){
         return new FirstAliveIterator();
@@ -29,8 +26,23 @@ public class Army {
         }
     }
 
+    public Iterator<Warrior> secondAlive(){return new SecondAliveIterator();}
+
+    private class SecondAliveIterator implements Iterator<Warrior>{
+        @Override
+        public boolean hasNext() {
+            return warriors.size()>=2;
+        }
+
+        @Override
+        public Warrior next() {
+            if (!hasNext()) return null;
+            return warriors.get(1);
+        }
+    }
+
     public Army(){
-        warriors = new LinkedList<Warrior>();
+        warriors = new ArrayList<Warrior>();
     }
 
     public Army addUnits(Supplier<Warrior> factory){
@@ -44,10 +56,11 @@ public class Army {
     }
 
     private Warrior peekFirst(){
-        return warriors.peek();
+        if (warriors.size()==0) return null;
+        return warriors.get(0);
     }
 
     private Warrior removeFirst(){
-        return warriors.poll();
+        return warriors.remove(0);
     }
 }

@@ -45,7 +45,8 @@ public class DuelFightTest {
                 Arguments.of(new Vampire(), new Defender(), false),
                 Arguments.of(new Vampire(), new Knight(), false),
                 Arguments.of(new Vampire(), new Warrior(), true),
-                Arguments.of(new Vampire(), new Rookie(), true)
+                Arguments.of(new Vampire(), new Rookie(), true),
+                Arguments.of(new Lancer(), new Vampire(), true)
                 );
     }
 

@@ -40,6 +40,25 @@ public class ArmyFightTest {
                         new Army().addUnits(Defender::new),
                         new Army().addUnits(Vampire::new, 3),
                         false
+                ),
+                Arguments.of(
+                        new Army().addUnits(Lancer::new),
+                        new Army().addUnits(Warrior::new).addUnits(Knight::new),
+                        false
+                ),
+                Arguments.of(
+                        new Army().addUnits(Defender::new, 2).addUnits(Vampire::new,2).
+                                addUnits(Lancer::new, 4).addUnits(Warrior::new),
+                        new Army().addUnits(Warrior::new, 2).addUnits(Lancer::new, 2).
+                                addUnits(Defender::new, 2).addUnits(Vampire::new, 2),
+                        true
+                ),
+                Arguments.of(
+                        new Army().addUnits(Warrior::new).addUnits(Lancer::new).
+                                addUnits(Defender::new, 2),
+                        new Army().addUnits(Vampire::new, 3).addUnits(Warrior::new).
+                                addUnits(Lancer::new, 2),
+                        false
                 )
         );
     }
