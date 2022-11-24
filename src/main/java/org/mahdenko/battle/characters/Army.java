@@ -1,12 +1,54 @@
 package org.mahdenko.battle.characters;
 
-import java.util.*;
+import org.mahdenko.battle.characters.warrior.HasNext;
+import org.mahdenko.battle.characters.warrior.Warrior;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.function.Supplier;
 
 public class Army {
-    private ArrayList<Warrior> warriors;
+    private ArrayList<HasNext> warriors;
 
-    public Iterator<Warrior> firstAlive(){
+    public Army(){
+        warriors = new ArrayList<HasNext>();
+    }
+
+    public Warrior peekFirst(){
+        if (!warriors.isEmpty()) return warriors.get(0);
+        else return null;
+    }
+
+    public Warrior removeFirst(){
+        return warriors.remove(0);
+    }
+
+    public Warrior getLast(){
+        if (!warriors.isEmpty()) return warriors.get(warriors.size()-1);
+        else return null;
+    }
+
+    public Army addUnits(Supplier<Warrior> factory){
+        Warrior warrior = factory.get();
+        if (!warriors.isEmpty()) ((HasNext)  getLast()).setNext(warrior);
+        warriors.add(new HasNext(warrior, null));
+        return this;
+    }
+
+    public Army addUnits(Supplier<Warrior> factory, int number){
+        for (int i=0; i<number; i++) this.addUnits(factory);
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        String res = "";
+        for (Warrior warrior: warriors){
+            res+= warrior.toString() +"\n";
+        }
+        return res;
+    }
+
+        public Iterator<Warrior> firstAlive(){
         return new FirstAliveIterator();
     }
 
@@ -20,47 +62,9 @@ public class Army {
         @Override
         public Warrior next() {
             if (!hasNext()){
-                throw new NoSuchElementException();
+                return null;
             }
             return peekFirst();
         }
-    }
-
-    public Iterator<Warrior> secondAlive(){return new SecondAliveIterator();}
-
-    private class SecondAliveIterator implements Iterator<Warrior>{
-        @Override
-        public boolean hasNext() {
-            return warriors.size()>=2;
-        }
-
-        @Override
-        public Warrior next() {
-            if (!hasNext()) return null;
-            return warriors.get(1);
-        }
-    }
-
-    public Army(){
-        warriors = new ArrayList<Warrior>();
-    }
-
-    public Army addUnits(Supplier<Warrior> factory){
-        warriors.add(factory.get());
-        return this;
-    }
-
-    public Army addUnits(Supplier<Warrior> factory, int number){
-        for (int i=0; i<number; i++) this.addUnits(factory);
-        return this;
-    }
-
-    private Warrior peekFirst(){
-        if (warriors.size()==0) return null;
-        return warriors.get(0);
-    }
-
-    private Warrior removeFirst(){
-        return warriors.remove(0);
     }
 }

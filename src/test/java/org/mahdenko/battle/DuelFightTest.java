@@ -4,7 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.mahdenko.battle.characters.*;
+import org.mahdenko.battle.characters.warrior.Warrior;
 
 import java.util.stream.Stream;
 
@@ -21,32 +21,31 @@ public class DuelFightTest {
 
     static Stream<Arguments> duelTest(){
         return Stream.of(
-                Arguments.of(new Warrior(), new Warrior(), true),
-                Arguments.of(new Knight(), new Knight(), true),
-                Arguments.of(new Knight(), new Warrior(), true),
-                Arguments.of(new Warrior(), new Knight(), false),
-                Arguments.of(new Rookie(), new Rookie(), true),
-                Arguments.of(new Knight(), new Rookie(), true),
-                Arguments.of(new Warrior(), new Rookie(), true),
-                Arguments.of(new Rookie(), new Warrior(), false),
-                Arguments.of(new Rookie(), new Knight(), false),
-                Arguments.of(new Defender(), new Defender(), true),
-                Arguments.of(new Knight(), new Defender(), true),
-                Arguments.of(new Warrior(), new Defender(), false),
-                Arguments.of(new Rookie(), new Defender(), false),
-                Arguments.of(new Defender(), new Knight(), false),
-                Arguments.of(new Defender(), new Warrior(), true),
-                Arguments.of(new Defender(), new Rookie(), true),
-                Arguments.of(new Vampire(), new Vampire(), true),
-                Arguments.of(new Defender(), new Vampire(), true),
-                Arguments.of(new Knight(), new Vampire(), true),
-                Arguments.of(new Warrior(), new Vampire(), true),
-                Arguments.of(new Rookie(), new Vampire(), false),
-                Arguments.of(new Vampire(), new Defender(), false),
-                Arguments.of(new Vampire(), new Knight(), false),
-                Arguments.of(new Vampire(), new Warrior(), true),
-                Arguments.of(new Vampire(), new Rookie(), true),
-                Arguments.of(new Lancer(), new Vampire(), true)
+                Arguments.of(Warrior.newWarrior(),Warrior.newWarrior(), true),
+                Arguments.of(Warrior.newKnight(), Warrior.newKnight(), true),
+                Arguments.of(Warrior.newKnight(), Warrior.newWarrior(), true),
+                Arguments.of(Warrior.newWarrior(), Warrior.newKnight(), false),
+                Arguments.of(Warrior.newRookie(), Warrior.newRookie(), true),
+                Arguments.of(Warrior.newKnight(), Warrior.newRookie(), true),
+                Arguments.of(Warrior.newWarrior(), Warrior.newRookie(), true),
+                Arguments.of(Warrior.newRookie(), Warrior.newWarrior(), false),
+                Arguments.of(Warrior.newRookie(), Warrior.newKnight(), false),
+                Arguments.of(Warrior.newDefender(), Warrior.newDefender(), true),
+                Arguments.of(Warrior.newKnight(), Warrior.newDefender(), true),
+                Arguments.of(Warrior.newWarrior(), Warrior.newDefender(), false),
+                Arguments.of(Warrior.newRookie(), Warrior.newDefender(), false),
+                Arguments.of(Warrior.newDefender(), Warrior.newKnight(), false),
+                Arguments.of(Warrior.newDefender(), Warrior.newWarrior(), true),
+                Arguments.of(Warrior.newDefender(), Warrior.newRookie(), true),
+                Arguments.of(Warrior.newVampire(), Warrior.newVampire(), true),
+                Arguments.of(Warrior.newDefender(), Warrior.newVampire(), true),
+                Arguments.of(Warrior.newKnight(), Warrior.newVampire(), true),
+                Arguments.of(Warrior.newWarrior(), Warrior.newVampire(), true),
+                Arguments.of(Warrior.newRookie(), Warrior.newVampire(), false),
+                Arguments.of(Warrior.newVampire(), Warrior.newDefender(), false),
+                Arguments.of(Warrior.newVampire(), Warrior.newKnight(), false),
+                Arguments.of(Warrior.newVampire(), Warrior.newWarrior(), true),
+                Arguments.of(Warrior.newVampire(), Warrior.newRookie(), true)
                 );
     }
 
