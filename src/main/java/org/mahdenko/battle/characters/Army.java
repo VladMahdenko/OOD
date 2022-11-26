@@ -2,6 +2,7 @@ package org.mahdenko.battle.characters;
 
 import org.mahdenko.battle.characters.warrior.HasNext;
 import org.mahdenko.battle.characters.warrior.Warrior;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.function.Supplier;
@@ -48,11 +49,11 @@ public class Army {
         return res;
     }
 
-        public Iterator<Warrior> firstAlive(){
-        return new FirstAliveIterator();
+    public Iterator<Warrior> firstAlive(){
+        return new QueueIterator();
     }
 
-    private class FirstAliveIterator implements Iterator<Warrior>{
+    private class QueueIterator implements Iterator<Warrior>{
         @Override
         public boolean hasNext() {
             while(peekFirst()!=null && !peekFirst().isAlive()) removeFirst();
@@ -65,6 +66,37 @@ public class Army {
                 return null;
             }
             return peekFirst();
+        }
+    }
+
+    public Army organiseForStraightFight(){
+        for (HasNext w : warriors){
+            w.setNext(null);
+        }
+        return this;
+    }
+
+    public Army organiseForQueueFight(){
+        for (int i=0; i< warriors.size()-1; i++){
+            warriors.get(i).setNext(warriors.get(i+1));
+        }
+        return this;
+    }
+
+    public ArrayList<HasNext> getWarriors() {
+        return warriors;
+    }
+
+    public HasNext getWarrior(int index){
+        return getWarriors().get(index);
+    }
+
+    public void removeDead(){
+        for (int i = 0;; i++){
+            while (!warriors.isEmpty() && !warriors.get(i).isAlive()){
+                warriors.remove(i);
+            }
+            if (i < warriors.size()) break;
         }
     }
 }

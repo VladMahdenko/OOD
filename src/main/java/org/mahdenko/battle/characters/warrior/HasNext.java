@@ -31,8 +31,12 @@ public class HasNext extends WarriorDecorator{
 
     private void heal(){
         if (hasNext()){
-            if (next instanceof WithHealing healer) healer.heal(this.getKernel());
-            if (next instanceof HasNext) ((HasNext) next).heal();
+            if (next instanceof WarriorDecorator decorator) {
+                if (decorator.getHealer()!=null) decorator.getHealer().heal(this.getKernel());
+            }
+            if (next instanceof HasNext) {
+                ((HasNext) next).heal();
+            }
         }
     }
 }

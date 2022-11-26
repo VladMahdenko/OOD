@@ -31,12 +31,33 @@ public class Battle {
 
     //army vs army
     public static boolean fight(Army attackers, Army defenders){
+        attackers.organiseForQueueFight();
+        defenders.organiseForQueueFight();
+
         Iterator<Warrior> itAttackers = attackers.firstAlive();
         Iterator<Warrior> itDefenders = defenders.firstAlive();
 
         while (itAttackers.hasNext() && itDefenders.hasNext()){
            fight(itAttackers.next(), itDefenders.next());
         }
+
         return itAttackers.hasNext();
+    }
+
+    public static boolean straightFight(Army attackers, Army defenders){
+        attackers.organiseForStraightFight();
+        defenders.organiseForStraightFight();
+
+        while(!attackers.getWarriors().isEmpty() && !defenders.getWarriors().isEmpty()) {
+            for (int i = 0; i < attackers.getWarriors().size(); i++) {
+                if (i < defenders.getWarriors().size()) {
+                    fight(attackers.getWarrior(i), defenders.getWarrior(i));
+                }
+            }
+            attackers.removeDead();
+            defenders.removeDead();
+        }
+
+        return attackers.firstAlive().hasNext();
     }
 }
