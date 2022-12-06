@@ -45,7 +45,30 @@ public class DuelFightTest {
                 Arguments.of(Warrior.newVampire(), Warrior.newDefender(), false),
                 Arguments.of(Warrior.newVampire(), Warrior.newKnight(), false),
                 Arguments.of(Warrior.newVampire(), Warrior.newWarrior(), true),
-                Arguments.of(Warrior.newVampire(), Warrior.newRookie(), true)
+                Arguments.of(Warrior.newVampire(), Warrior.newRookie(), true),
+                Arguments.of(Warrior.newLancer(), Warrior.newLancer(), true),
+                Arguments.of(Warrior.newLancer(), Warrior.newWarrior(), true),
+                Arguments.of(Warrior.newLancer(), Warrior.newRookie(), true),
+                Arguments.of(Warrior.newLancer(), Warrior.newKnight(), false),
+                Arguments.of(Warrior.newLancer(), Warrior.newDefender(), true),
+                Arguments.of(Warrior.newLancer(), Warrior.newVampire(), true),
+                Arguments.of(Warrior.newWarrior(), Warrior.newLancer(), false),
+                Arguments.of(Warrior.newRookie(), Warrior.newLancer(), false),
+                Arguments.of(Warrior.newKnight(), Warrior.newLancer(), true),
+                Arguments.of(Warrior.newDefender(), Warrior.newLancer(), false),
+                Arguments.of(Warrior.newVampire(), Warrior.newLancer(), false),
+                Arguments.of(Warrior.newHealer(), Warrior.newWarrior(), false),
+                Arguments.of(Warrior.newHealer(), Warrior.newKnight(), false),
+                Arguments.of(Warrior.newHealer(), Warrior.newRookie(), false),
+                Arguments.of(Warrior.newHealer(), Warrior.newDefender(), false),
+                Arguments.of(Warrior.newHealer(), Warrior.newVampire(), false),
+                Arguments.of(Warrior.newHealer(), Warrior.newLancer(), false),
+                Arguments.of(Warrior.newWarrior(), Warrior.newHealer(), true),
+                Arguments.of(Warrior.newKnight(), Warrior.newHealer(), true),
+                Arguments.of(Warrior.newRookie(), Warrior.newHealer(), true),
+                Arguments.of(Warrior.newDefender(), Warrior.newHealer(), true),
+                Arguments.of(Warrior.newVampire(), Warrior.newHealer(), true),
+                Arguments.of(Warrior.newLancer(), Warrior.newHealer(), true)
                 );
     }
 

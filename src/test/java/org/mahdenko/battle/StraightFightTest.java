@@ -38,8 +38,47 @@ public class StraightFightTest {
                         new Army().addUnits(Warrior::newWarrior, 10).organiseForStraightFight(),
                         new Army().addUnits(Warrior::newWarrior, 6).addUnits(Warrior::newLancer, 5).organiseForStraightFight(),
                         false
+                ),
+                Arguments.of(
+                        new Army().addUnits(Warrior::newLancer, 5).addUnits(Warrior::newVampire, 3)
+                                .addUnits(Warrior::newWarrior, 4).addUnits(Warrior::newDefender, 2)
+                                .organiseForStraightFight(),
+                        new Army().addUnits(Warrior::newWarrior, 4).addUnits(Warrior::newDefender,4)
+                                .addUnits(Warrior::newVampire,6).addUnits(Warrior::newLancer, 5)
+                                .organiseForStraightFight(),
+                        false
+                ),
+                Arguments.of(
+                        new Army().addUnits(Warrior::newLancer, 7).addUnits(Warrior::newVampire, 3)
+                                .addUnits(Warrior::newWarrior, 4).addUnits(Warrior::newDefender, 2)
+                                .organiseForStraightFight(),
+                        new Army().addUnits(Warrior::newWarrior, 4).addUnits(Warrior::newDefender,4)
+                                .addUnits(Warrior::newVampire,6).addUnits(Warrior::newLancer, 5)
+                                .organiseForStraightFight(),
+                        true
+                ),
+                Arguments.of(
+                        new Army().addUnits(Warrior::newLancer, 7).addUnits(Warrior::newVampire,3)
+                                .addUnits(Warrior::newHealer).addUnits(Warrior::newWarrior, 4)
+                                .addUnits(Warrior::newHealer).addUnits(Warrior::newDefender, 2)
+                                .organiseForStraightFight(),
+                        new Army().addUnits(Warrior::newWarrior, 4).addUnits(Warrior::newDefender, 4)
+                                .addUnits(Warrior::newHealer).addUnits(Warrior::newVampire,6)
+                                .addUnits(Warrior::newLancer, 4)
+                                .organiseForStraightFight(),
+                        true
+                ),
+                Arguments.of(
+                        new Army().addUnits(Warrior::newLancer, 4).addUnits(Warrior::newWarrior, 3)
+                                .addUnits(Warrior::newHealer).addUnits(Warrior::newWarrior, 4)
+                                .addUnits(Warrior::newHealer).addUnits(Warrior::newKnight, 2)
+                                .organiseForStraightFight(),
+                        new Army().addUnits(Warrior::newWarrior, 4).addUnits(Warrior::newDefender, 4)
+                                .addUnits(Warrior::newHealer).addUnits(Warrior::newVampire,2)
+                                .addUnits(Warrior::newLancer, 4)
+                                .organiseForStraightFight(),
+                        true
                 )
-
         );
     }
 }
